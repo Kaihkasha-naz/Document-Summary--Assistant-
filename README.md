@@ -1,4 +1,4 @@
-Document Summary Assistant 
+$Document Summary Assistant$
  
 Overview 
  
