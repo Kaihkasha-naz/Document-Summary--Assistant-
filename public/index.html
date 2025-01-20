@@ -1,0 +1,175 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document Summary Assistant</title>
+</head>
+<body>
+  <h1>Document Summary Assistant</h1>
+  <form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" name="document" id="fileInput" accept="application/pdf, image/*" required>
+    <select id="summaryLength" name="summaryLength">
+      <option value="short">Short</option>
+      <option value="medium">Medium</option>
+      <option value="long">Long</option>
+    </select>
+    <button type="submit">Upload Document</button>
+  </form>
+  <div id="summaryOutput"></div>
+
+  <script>
+
+  document.getElementById('uploadForm').addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const fileInput = document.getElementById('fileInput');
+  const summaryLength = document.getElementById('summaryLength').value;
+  const formData = new FormData();
+  formData.append('document', fileInput.files[0]);
+  formData.append('summaryLength', summaryLength);
+
+  
+    try {
+    const response = await fetch('/api/uploads', {
+      method: 'POST',
+      body: formData
+    });
+    // Read response text to debug
+    const text = await response.text();
+    console.log('Raw Response:', text);
+
+    // Now try parsing JSON
+    const data = JSON.parse(text);
+
+    if (data.summary) {
+      document.getElementById('summaryOutput').innerText = `Summary: ${data.summary}`;
+    } else {
+      document.getElementById('summaryOutput').innerText = 'No summary available';
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    document.getElementById('summaryOutput').innerText = `Error: ${error.message}`;
+  }
+});
+
+
+  </script>
+</body>
+</html>
+ -->
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document Summary Assistant</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #4a90e2;
+    }
+    form {
+      max-width: 500px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    input, select, button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 1rem;
+    }
+    button {
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #357ab8;
+    }
+    #summaryOutput {
+      max-width: 500px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      font-size: 1rem;
+    }
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+    .success {
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Document Summary Assistant</h1>
+  <form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" name="document" id="fileInput" accept="application/pdf, image/*" required>
+    <select id="summaryLength" name="summaryLength">
+      <option value="short">Short</option>
+      <option value="medium">Medium</option>
+      <option value="long">Long</option>
+    </select>
+    <button type="submit">Upload Document</button>
+  </form>
+  <div id="summaryOutput"></div>
+
+  <script>
+    
+    document.getElementById('uploadForm').addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const fileInput = document.getElementById('fileInput');
+  const summaryLength = document.getElementById('summaryLength').value;
+  const formData = new FormData();
+  formData.append('document', fileInput.files[0]);
+  formData.append('summaryLength', summaryLength);
+
+  
+    try {
+    const response = await fetch('/api/uploads', {
+      method: 'POST',
+      body: formData
+    });
+    // Read response text to debug
+    const text = await response.text();
+    console.log('Raw Response:', text);
+
+    // Now try parsing JSON
+    const data = JSON.parse(text);
+
+    if (data.summary) {
+      document.getElementById('summaryOutput').innerText = `Summary: ${data.summary}`;
+    } else {
+      document.getElementById('summaryOutput').innerText = 'No summary available';
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    document.getElementById('summaryOutput').innerText = `Error: ${error.message}`;
+  }
+});
+
+
+  </script>
+</body>
+</html>
